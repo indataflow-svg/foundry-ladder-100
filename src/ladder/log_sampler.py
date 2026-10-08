@@ -9,7 +9,7 @@ def reservoir_sample(lines: list[str], k: int, seed: int = 0) -> list[str]:
     """Uniform sample of up to ``k`` lines; same seed always wins the same lines."""
     if k < 0:
         raise ValueError("k must be non-negative")
-    rng = random.Random(seed)
+    rng = random.Random(seed)  # nosec B311  # seeded determinism, not security randomness
     reservoir: list[str] = []
     for index, line in enumerate(lines):
         if index < k:

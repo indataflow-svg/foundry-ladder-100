@@ -1,0 +1,12 @@
+{
+  "gates": [
+    {"name": "test", "command": "pytest -q"},
+    {"name": "coverage", "command": "pytest -q --cov=src --cov-report=term-missing"},
+    {"name": "lint", "command": "ruff check src tests"},
+    {"name": "format", "command": "ruff format --check src tests"},
+    {"name": "typecheck", "command": "mypy src"},
+    {"name": "security", "command": "bandit -r src -q"},
+    {"name": "secrets", "command": "detect-secrets scan --baseline .secrets.baseline"},
+    {"name": "diffcheck", "command": "git diff --check"}
+  ]
+}
