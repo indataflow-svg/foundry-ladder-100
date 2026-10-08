@@ -19,3 +19,10 @@ def reservoir_sample(lines: list[str], k: int, seed: int = 0) -> list[str]:
             if pick < k:
                 reservoir[pick] = line
     return reservoir
+
+
+def sample_every(lines: list[str], n: int) -> list[str]:
+    """Return every nth line from the first; n=1 is identity; non-positive n raises; empty input yields []."""
+    if n <= 0:
+        raise ValueError("n must be positive")
+    return lines[::n]
