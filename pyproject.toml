@@ -3,6 +3,9 @@ name = "ladder-target"
 version = "0.1.0"
 requires-python = ">=3.11"
 
+[project.optional-dependencies]
+dev = ["pytest", "pytest-cov", "ruff", "mypy", "bandit", "detect-secrets"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
