@@ -31,6 +31,14 @@ class Money:
         """Scale by an integer factor."""
         return Money(self.cents * factor, self.currency)
 
+    def percentage(self, percent: float) -> Money:
+        """Calculate a percentage of the amount with half-up rounding."""
+        if not isinstance(percent, (int, float)):
+            raise TypeError("percent must be a number")
+        percent_int = int(percent)
+        rounded_cents = round(self.cents * percent_int / 100)
+        return Money(rounded_cents, self.currency)
+
     def format(self) -> str:
         """Render as ``<CUR> <major>.<minor>``, sign-aware."""
         sign = "-" if self.cents < 0 else ""
