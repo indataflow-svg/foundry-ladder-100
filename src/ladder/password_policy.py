@@ -37,6 +37,13 @@ def score(password: str) -> int:
     return min(4, length_points + min(2, classes // 2))
 
 
+def sampled_violations(password: str, k: int, seed: int) -> list[str]:
+    """Audit batches hold thousands of passwords."""
+    from ladder.log_sampler import reservoir_sample
+
+    return reservoir_sample(validate(password), k, seed)
+
+
 def generate_passphrase(word_list: list[str], count: int) -> str:
     """Generate a passphrase by joining the first count words from the word list."""
     if not word_list:
