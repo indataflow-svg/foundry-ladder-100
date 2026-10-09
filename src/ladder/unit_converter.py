@@ -35,3 +35,12 @@ def convert(value: float, from_unit: str, to_unit: str) -> float:
             return celsius * 9.0 / 5.0 + 32.0
         return celsius + 273.15
     raise ValueError(f"cannot convert {from_unit!r} to {to_unit!r}")
+
+
+def can_convert(value: float, from_unit: str, to_unit: str) -> bool:
+    """True when convert accepts these arguments (never raises)."""
+    try:
+        convert(value, from_unit, to_unit)
+    except ValueError:
+        return False
+    return True
