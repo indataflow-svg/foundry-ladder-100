@@ -1,5 +1,3 @@
-"""Column profiler for CSV text (pure function, no I/O)."""
-
 from __future__ import annotations
 
 
@@ -9,6 +7,25 @@ def _is_number(value: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+def column_top_values(text: str, column: str, limit: int) -> list[tuple[str, int]]:
+    """Return the top values in a column, limited by the given limit."""
+    lines = [line for line in text.splitlines() if line.strip()]
+    if not lines:
+        return []
+    header = [cell.strip() for cell in lines[0].split(",")]
+    if column not in header:
+        return []
+    column_index = header.index(column)
+    values: dict[str, int] = {}
+    for line in lines[1:]:
+        cells = [cell.strip() for cell in line.split(",")]
+        if len(cells) > column_index:
+            value = cells[column_index]
+            values[value] = values.get(value, 0) + 1
+    sorted_values = sorted(values.items(), key=lambda x: x[1], reverse=True)
+    return sorted_values[:limit]
 
 
 def profile_csv(text: str) -> dict[str, object]:
