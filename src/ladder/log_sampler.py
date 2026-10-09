@@ -21,6 +21,15 @@ def reservoir_sample(lines: list[str], k: int, seed: int = 0) -> list[str]:
     return reservoir
 
 
+def can_sample_every(lines: list[str], n: int) -> bool:
+    """True when sample_every accepts these arguments (never raises)."""
+    try:
+        sample_every(lines, n)
+    except ValueError:
+        return False
+    return True
+
+
 def sample_every(lines: list[str], n: int) -> list[str]:
     """Return every nth line from the first; n=1 is identity; non-positive n raises; empty input yields []."""
     if n <= 0:
