@@ -35,3 +35,8 @@ def convert(value: float, from_unit: str, to_unit: str) -> float:
             return celsius * 9.0 / 5.0 + 32.0
         return celsius + 273.15
     raise ValueError(f"cannot convert {from_unit!r} to {to_unit!r}")
+
+
+def map_convert(items: list[float], from_unit: str, to_unit: str) -> list[float]:
+    """Apply convert to each item (deterministic batch)."""
+    return [convert(item, from_unit, to_unit) for item in items]
