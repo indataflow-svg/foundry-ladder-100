@@ -35,3 +35,14 @@ def score(password: str) -> int:
     )
     length_points = 0 if len(password) < 8 else (1 if len(password) < MIN_LENGTH else 2)
     return min(4, length_points + min(2, classes // 2))
+
+
+def generate_passphrase(word_list: list[str], count: int) -> str:
+    """Generate a passphrase by joining the first count words from the word list."""
+    if not word_list:
+        raise ValueError("Word list cannot be empty")
+    if count <= 0:
+        raise ValueError("Count must be a positive integer")
+    if len(word_list) < count:
+        raise ValueError("Word list is shorter than the requested count")
+    return " ".join(word_list[:count])
