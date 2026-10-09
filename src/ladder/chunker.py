@@ -2,6 +2,21 @@
 
 from __future__ import annotations
 
+import re
+
+
+def split_sentences(text: str) -> list[str]:
+    """Split ``text`` into sentences based on . ! ? followed by whitespace."""
+    if not text:
+        return []
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    out: list[str] = []
+    for sentence in sentences:
+        stripped = sentence.strip()
+        if stripped and not re.fullmatch(r"[.!?\s]+", stripped):
+            out.append(stripped)
+    return out
+
 
 def chunked(text: str, size: int, overlap: int = 0, *, by_line: bool = False) -> list[str]:
     """Split ``text`` into ``size``-unit chunks with ``overlap``-unit overlap."""
