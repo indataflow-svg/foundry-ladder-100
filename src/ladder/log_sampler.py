@@ -21,6 +21,11 @@ def reservoir_sample(lines: list[str], k: int, seed: int = 0) -> list[str]:
     return reservoir
 
 
+def map_sample_every(items: list[list[str]], n: int) -> list[list[str]]:
+    """Apply sample_every to each item (deterministic batch)."""
+    return [sample_every(item, n) for item in items]
+
+
 def sample_every(lines: list[str], n: int) -> list[str]:
     """Return every nth line from the first; n=1 is identity; non-positive n raises; empty input yields []."""
     if n <= 0:
