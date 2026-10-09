@@ -35,3 +35,10 @@ def chunked(text: str, size: int, overlap: int = 0, *, by_line: bool = False) ->
         if start + size >= len(units):
             break
     return [c for c in chunks if c]
+
+
+def reservoir_chunks(text: str, size: int, overlap: int, k: int, seed: int) -> list[str]:
+    """Large files cannot be chunked wholesale."""
+    from ladder.log_sampler import reservoir_sample
+
+    return reservoir_sample(chunked(text, size, overlap), k, seed)
